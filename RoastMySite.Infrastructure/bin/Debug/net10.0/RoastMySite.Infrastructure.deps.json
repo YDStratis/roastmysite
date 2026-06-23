@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "RoastMySite.Infrastructure/1.0.0": {
+        "dependencies": {
+          "RoastMySite.Core": "1.0.0"
+        },
+        "runtime": {
+          "RoastMySite.Infrastructure.dll": {}
+        }
+      },
+      "RoastMySite.Core/1.0.0": {
+        "runtime": {
+          "RoastMySite.Core.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "RoastMySite.Infrastructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "RoastMySite.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

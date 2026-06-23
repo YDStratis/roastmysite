@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="RoastMySite.API/RoastMySite.API.csproj" Id="26f57c3c-1c89-48b0-8f61-70f0b0ae8a2e" />
+  <Project Path="RoastMySite.Core/RoastMySite.Core.csproj" Id="dcf5015f-aa59-44e0-9dd5-6d46eae1fc22" />
+  <Project Path="RoastMySite.Infrastructure/RoastMySite.Infrastructure.csproj" Id="4fe56ad6-dcae-4e69-a5f6-e6f7852304e7" />
+</Solution>
