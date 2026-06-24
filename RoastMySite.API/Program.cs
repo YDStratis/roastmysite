@@ -1,4 +1,3 @@
-
 using Microsoft.EntityFrameworkCore;
 using RoastMySite.Infrastructure;
 using Scalar.AspNetCore;
@@ -12,7 +11,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // Controllers
 builder.Services.AddControllers();
 
-// Swagger / Scalar
+// OpenAPI
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
