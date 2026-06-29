@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RoastMySite.API.Services;
 using RoastMySite.Core.Entities;
 using RoastMySite.Infrastructure;
@@ -44,6 +45,22 @@ public class ScanController : ControllerBase
         _ = Task.Run(() => RunScanInBackgroundAsync(scanRequest.Id));
 
         return Accepted(new { scanId = scanRequest.Id });
+    }
+
+    [HttpGet("{scanId:guid}")]
+    public async Task<IActionResult> GetScan(Guid scanId)
+    {
+        var scanRequest = await _db.ScanRequests
+            .Include(r => r.Report)
+            .FirstOrDefaultAsync(r => r.Id == scanId);
+
+        if (scanRequest is null)
+        {
+            return NotFound();
+        }
+
+        // Report is null while the scan is still running; the frontend polls.
+        return Ok(scanRequest);
     }
 
     private async Task RunScanInBackgroundAsync(Guid scanRequestId)

@@ -1,0 +1,31 @@
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, #ff3d1f, #ff7a1a);
+  z-index: 60;
+}
+
+.hero-glow {
+  position: absolute;
+  top: 16%;
+  left: 50%;
+  width: 680px;
+  height: 680px;
+  margin-left: -340px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 90, 34, 0.2), transparent 60%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+@media (max-width: 600px) {
+  .hero-glow {
+    width: 440px;
+    height: 440px;
+    margin-left: -220px;
+  }
+}

@@ -137,7 +137,6 @@ main {
 .hero-copy {
   width: min(900px, 100%);
   margin: 0 auto;
-  animation: fade-up 820ms ease both;
 }
 
 .eyebrow,
