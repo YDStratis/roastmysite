@@ -7,10 +7,22 @@ using RoastMySite.API.Services;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
+const string FrontendDevCorsPolicy = "FrontendDevCors";
 
 // Database
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
+
+// Local frontend development
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(FrontendDevCorsPolicy, policy =>
+    {
+        policy.WithOrigins("http://localhost:5173", "http://127.0.0.1:5173")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
 
 // HTTP Clients
 builder.Services.AddHttpClient<WebsiteCrawler>();
@@ -56,6 +68,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+if (app.Environment.IsDevelopment())
+{
+    app.UseCors(FrontendDevCorsPolicy);
+}
+
 app.UseAuthorization();
 app.MapControllers();
 
