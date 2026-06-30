@@ -3,7 +3,7 @@ export default function Navbar({ onStartRoasting }) {
     <header className="site-header">
       <nav className="navbar" aria-label="Primary navigation">
         <a className="brand" href="#top" aria-label="RoastMySite home">
-          RoastMySite <span aria-hidden="true">🔥</span>
+          RoastMySite
         </a>
         <div className="nav-links">
           <a href="#how-it-works">How it works</a>

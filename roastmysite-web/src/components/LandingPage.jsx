@@ -1,43 +1,24 @@
-import { useCallback, useEffect, useState } from 'react';
-import {
-  AnimatePresence,
-  motion,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-} from 'motion/react';
+import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
 import ScanForm from './ScanForm.jsx';
+import DotField from './DotField.jsx';
 import Navbar from './Navbar.jsx';
 import FeatureGrid from './FeatureGrid.jsx';
 import RoastPreview from './RoastPreview.jsx';
 import HowItWorks from './HowItWorks.jsx';
 import FinalCta from './FinalCta.jsx';
 import SiteFooter from './SiteFooter.jsx';
-import IntroOverlay from './IntroOverlay.jsx';
 import { heroContainer, fadeUp } from '../lib/motionPresets.js';
 import './LandingPage.css';
 
 export default function LandingPage() {
   const reduceMotion = useReducedMotion();
-  const introSeen =
-    typeof window !== 'undefined' && sessionStorage.getItem('introSeen') === '1';
-
-  const [showIntro, setShowIntro] = useState(!introSeen);
-  const [introComplete, setIntroComplete] = useState(introSeen);
-
-  // Skip the splash entirely when the user prefers reduced motion.
-  useEffect(() => {
-    if (reduceMotion) {
-      setShowIntro(false);
-      setIntroComplete(true);
-    }
-  }, [reduceMotion]);
-
-  const handleIntroDone = useCallback(() => {
-    sessionStorage.setItem('introSeen', '1');
-    setShowIntro(false);
-    setIntroComplete(true);
-  }, []);
+  // The dot-field is a mouse-driven, canvas-heavy rAF loop. Only render it on
+  // devices with a real pointer — on touch/mobile it does nothing useful but
+  // still burns frames, so skipping it there keeps scrolling smooth.
+  const enableDotField =
+    !reduceMotion &&
+    typeof window !== 'undefined' &&
+    window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
   // Scroll-linked effects.
   const { scrollY, scrollYProgress } = useScroll();
@@ -51,9 +32,17 @@ export default function LandingPage() {
 
   return (
     <div className="app-shell" id="top">
-      <AnimatePresence>
-        {showIntro && <IntroOverlay key="intro" onComplete={handleIntroDone} />}
-      </AnimatePresence>
+      {enableDotField && (
+        <DotField
+          className="site-bg"
+          dotRadius={1.5}
+          dotSpacing={14}
+          bulgeStrength={67}
+          glowRadius={160}
+          sparkle={false}
+          waveAmplitude={0}
+        />
+      )}
 
       <motion.div
         className="scroll-progress"
@@ -74,13 +63,13 @@ export default function LandingPage() {
             className="hero-copy"
             variants={heroContainer}
             initial="hidden"
-            animate={introComplete ? 'show' : 'hidden'}
+            animate="show"
           >
             <motion.p className="eyebrow" variants={fadeUp}>
               Website audits with attitude
             </motion.p>
             <motion.h1 id="landing-title" variants={fadeUp}>
-              Roast My Site 🔥
+              Roast My Site
             </motion.h1>
             <motion.p className="subtitle" variants={fadeUp}>
               Your website has problems. We'll find all of them.

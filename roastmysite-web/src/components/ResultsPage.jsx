@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { motion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
+import DotField from './DotField.jsx';
 import './ResultsPage.css';
 
 const API_BASE = 'http://localhost:5029';
@@ -58,6 +59,12 @@ const cardItem = {
 export default function ResultsPage() {
   const { scanId } = useParams();
   const navigate = useNavigate();
+  const reduceMotion = useReducedMotion();
+  // Canvas-heavy, mouse-driven background — only on real-pointer devices.
+  const enableDotField =
+    !reduceMotion &&
+    typeof window !== 'undefined' &&
+    window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
   const [report, setReport] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -138,10 +145,22 @@ export default function ResultsPage() {
 
   return (
     <div className="results-shell">
+      {enableDotField && (
+        <DotField
+          className="site-bg"
+          dotRadius={1.5}
+          dotSpacing={14}
+          bulgeStrength={67}
+          glowRadius={160}
+          sparkle={false}
+          waveAmplitude={0}
+        />
+      )}
+
       <header className="site-header">
         <nav className="navbar">
           <Link to="/" className="brand">
-            RoastMySite 🔥
+            RoastMySite
           </Link>
           <Link to="/" className="nav-cta">
             Roast another site
