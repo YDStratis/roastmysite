@@ -234,7 +234,7 @@ export default function ResultsPage() {
                 back.
               </p>
               <button className="primary-cta paywall-cta" type="button">
-                Unlock Full Report — €19
+                Unlock Full Report — €10
               </button>
             </div>
           )}
