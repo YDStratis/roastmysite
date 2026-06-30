@@ -11,12 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Crawling\" />
-    <Folder Include="AI\" />
-    <Folder Include="ExternalApis\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.12.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.9" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="10.0.9" />

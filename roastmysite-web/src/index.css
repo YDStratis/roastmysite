@@ -8,6 +8,15 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* Ember palette */
+  --ember-black: #0a0908;
+  --ember-charcoal: #161311;
+  --ember-red: #ff3d1f;
+  --ember-orange: #ff7a1a;
+  --ember-yellow: #ffb627;
+  --ember-smoke: #6b6560;
+  --ember-ash: #2a2622;
 }
 
 * {
